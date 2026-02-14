@@ -11,6 +11,9 @@ class JobForm
     {
         return $schema
             ->components([
+                // -------------------
+                // Info Job
+                // -------------------
                 Forms\Components\TextInput::make('title')
                     ->label('Nama Pekerjaan')
                     ->required()
@@ -50,6 +53,16 @@ class JobForm
                     ->label('Dibuat Oleh')
                     ->relationship('creator', 'name')
                     ->searchable()
+                    ->required(),
+
+                // -------------------
+                // Assign Users (pivot job_user)
+                // -------------------
+                Forms\Components\Select::make('users')
+                    ->label('Assign Users')
+                    ->relationship('users', 'name')
+                    ->multiple() 
+                    ->preload()
                     ->required(),
             ])
             ->columns(2);

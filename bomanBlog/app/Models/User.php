@@ -47,4 +47,11 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->role === 'admin';
     }
+
+    public function jobs()
+    {
+        return $this->belongsToMany(J0b::class, 'job_user', 'user_id', 'job_id')
+            ->withPivot('assigned_at')
+            ->withTimestamps();
+    }
 }

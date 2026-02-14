@@ -33,4 +33,10 @@ class J0b extends Model
     {
         return $this->belongsTo(User::class, 'created_by');
     }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'job_user', 'job_id', 'user_id')
+            ->withPivot('assigned_at')
+            ->withTimestamps();
+    }
 }
