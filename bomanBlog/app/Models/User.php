@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Filament\Panel;
+use App\Models\Job;
+
 
 class User extends Authenticatable implements FilamentUser
 {
@@ -50,8 +52,9 @@ class User extends Authenticatable implements FilamentUser
 
     public function jobs()
     {
-        return $this->belongsToMany(J0b::class, 'job_user', 'user_id', 'job_id')
+        return $this->belongsToMany(Job::class, 'job_user', 'user_id', 'job_id')
             ->withPivot('assigned_at')
             ->withTimestamps();
     }
+
 }
